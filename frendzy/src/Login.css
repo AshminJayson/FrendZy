@@ -53,7 +53,8 @@ form > p {
 
 
 input::placeholder {
-    font-size: 10px;
+    font-size: 12px;
+    letter-spacing: 1px;
 }
 
 label {
@@ -86,6 +87,74 @@ form > button {
 }
 
 
+
+.image-section {
+    background: url('./assets/5559852.jpg');
+    background-size: cover;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.image-up {
+    background: url('./assets/representation-user-experience-interface-design-smartphone.jpg');
+    background-size: cover;
+    border-radius: 1rem;
+    width: 60%;
+    height: 30%;
+    animation: up-down 1.5s infinite alternate;
+    margin-top: 5rem;
+    margin-left: 10%;
+}
+.image-down {
+    background: url('./assets/representation-user-experience-interface-design-smartphone1.jpg');
+    background-size: cover;
+    border-radius: 1rem;
+    width: 50%;
+    height: 40%;
+    animation: left-right 1.5s ease-in infinite alternate;
+    margin-top: -4rem;
+    margin-left: 12rem;
+    /* background: black; */
+}
+
+
+
+
+.image-section > h3 {
+    margin-top: 2rem;
+    color: white;
+    text-align: center;
+}
+
+.image-section > p {
+    margin: 1rem;
+    color: white;
+    font-size: 10px;
+    text-align: center;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+/* Animations */
+
+@-webkit-keyframes up-down {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-8px); }
+}
+@keyframes up-down {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-8px); }
+}
+
+@-webkit-keyframes left-right {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(12px); }
+}
+@keyframes left-right {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(12px); }
+}
 
 
 

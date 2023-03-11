@@ -28,23 +28,28 @@ export function Login() {
 
 
         axios.post('http://localhost:8082/api/verifyuser', user).then((res) => {
-            alert(res.data.loginStatus)
+            // alert(res.data.loginStatus)
             if(res.data.loginStatus == "Login Successfull") {
                 sessionStorage.setItem('access_token', res.data.accessToken)
-                console.log(sessionStorage.getItem("access_token"))
-                axios.get('http://localhost:8082/api/random', {headers: {"Authorization": `Bearer ${sessionStorage.getItem("access_token")}`}}).then((res) => {
-                    console.log(res)
+                // console.log(sessionStorage.getItem("access_token"))
+                // axios.get('http://localhost:8082/api/random', {headers: {"Authorization": `Bearer ${sessionStorage.getItem("access_token")}`}}).then((res) => {
+                //     console.log(res)
 
-                })
-                // navigate('/profile')
+                // })
+                navigate('/profile')
             }
             else {
                 if(res.data.loginStatus == 'Login Failed : Incorrect Password') {
-                    document.getElementsByName('password')[0].classList += " error"
+                    let p = document.getElementsByName('password')[0]
+                    p.classList += " error"
+                    p.placeholder = 'Incorrect Password'
+                    p.value = ''
                 }
                 else {
-                    document.getElementsByName('username')[0].classList += " error"
-
+                    let u = document.getElementsByName('username')[0]
+                    u.classList += " error"
+                    u.placeholder = 'Incorrect Username'
+                    u.value = ''
                 }
             }
         })
@@ -65,7 +70,12 @@ export function Login() {
                     <button>Login</button>
                 </form>
             </div>
-            <div className="image-section"></div>
+            <div className="image-section">
+                <div className="image-up"></div>
+                <div className="image-down"></div>
+                <h3>Get Closer to those <br/> who motivate you !</h3>
+                <p>Who you are with, defines who you become!</p>
+            </div>
         </div>
     )
     

@@ -30,9 +30,9 @@ router.post('/api/createuser', async (req, res) => {
     const usern = req.body.username
     const usere = req.body.emailid
 
-    const flag = await checkDuplicateUser(usern, usere, res)
+    await checkDuplicateUser(usern, usere, res)
 
-    if (flag) { 
+
     bcrypt.hash(user.password, saltrounds, (err, hash) => {
         // console.log('running')
         if (err) {
@@ -44,40 +44,41 @@ router.post('/api/createuser', async (req, res) => {
         insertUser(user)
         return res.end('User Created')
     })
-    }
+    
+
+
             
 })  
+
 
 
 
 async function checkDuplicateUser(usern, usere, res) {
 
 
-    let flag = true
+
     User.find({}, {'emailid' : 1, 'username' : 1, '_id': 0}).then(data => {
 
-        data.every((dt) => {
+        console.log(data)
+        for (dt of data) {
+
             // console.log('walking')
-            // console.log(dt)
+            console.log(dt)
             if (usern === dt.username) {
-                flag = false
                 res.end('This username is already in use')
                 return false
-                
             }
+
             if (usere === dt.emailid) {
-                flag = false
                 // console.log(dt.emailid)
                 res.end('This Email ID is already in use')
-                    return false
-                }
-        })
+                return false
+            }
+        }
 
         
     })
 
-    // console.log(flag)
-    return flag
     
 }
 

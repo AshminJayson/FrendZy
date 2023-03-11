@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-require('config');
+const config = require('config');
 require('dotenv').config()
 
 const db = "mongodb+srv://Ashmin:" + process.env.MONGO_PASSWORD +"@cluster0.acoof0c.mongodb.net/?retryWrites=true&w=majority"
