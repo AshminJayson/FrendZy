@@ -27,10 +27,22 @@ router.get('/api/getfriends', async (req, res) => {
 })
 
 
+router.post('/api/getfriendrequests', async (req, res) => {
+    User.findOne({username: req.body.username}, {"friendrequestsrecieved" : 1}).then((users) => {
+        if(users) {
+            res.json(users.friendrequestsrecieved)
+        }
+        else {
+            res.json('No requests')
+        }
+    })
+})
+
 // Send friend request
 
 
 router.post('/api/sendfriendrequest', async (req, res) => {
+
 
     User.findOne({username: req.body.currentuser}).then((currentuser) => {
         User.findOne({username: req.body.requesteduser}).then((requesteduser) => {
@@ -44,20 +56,51 @@ router.post('/api/sendfriendrequest', async (req, res) => {
                 username: currentuser.username
             })
 
-            insertUser(currentuser)
-            insertUser(requesteduser)
-
+            insertUser(currentuser).then(insertUser(requesteduser)).then()
             res.send('Friend Request Sent')
+
         })
     })
 
 })
 
+// Get status 
+
+router.post('/api/getrelation',auth, async (req, res) => {
+    User.findOne({username: req.body.currentuser}).then((currentuser) => {
+        User.findOne({username: req.body.requesteduser}).then((requesteduser) => {
+            
+            header = ''
+            for (let usera of requesteduser.friends) {
+                if (currentuser._id.equals(usera.userid))
+                    header = 'friends'
+            }
+
+            for (let usera of requesteduser.friendrequestsrecieved) {
+                // console.log(usera, currentuser)
+                if (currentuser._id.equals(usera.userid)) 
+                    header = 'friend req sent'
+                
+            }
+
+            for (let usera of requesteduser.friendrequestssent) {
+                if (currentuser._id.equals(usera.userid)) 
+                    header = 'friend req recieved'
+                
+            }
+
+            if (header === '')
+                header = 'no connection'
+            res.send(header)
+        })
+    })
+})
+
 // Accept friend request
 
-
-
 router.post('/api/acceptfriendrequest', async (req, res) => {
+
+    // console.log(req.body.currentuser, req.body.requesteduser)
     User.findOne({username: req.body.currentuser}).then((currentuser) => {
         User.findOne({username: req.body.requesteduser}).then((requesteduser) => {
             
@@ -74,16 +117,10 @@ router.post('/api/acceptfriendrequest', async (req, res) => {
                     username: currentuser.username
                 })
 
-
-                try {
                 insertUser(currentuser)
                 insertUser(requesteduser)
-                    res.send('Friend Request Accepted')
-                }
-                catch {
-                    res.send('Error')
-                }
 
+                res.send('User has been added as a friend')
 
                 
             })
@@ -121,6 +158,9 @@ router.post('/api/declinefriendrequest', async (req, res) => {
         })
     })
 })
+
+
+// Remove user as friend
 
 
 
@@ -183,8 +223,6 @@ async function addfriend(req, res) {
 
             insertUser(currentuser)
             insertUser(requesteduser)
-
-            res.send('User has been added as a friend')
         })
     })
 

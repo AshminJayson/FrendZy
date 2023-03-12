@@ -89,7 +89,7 @@ async function checkDuplicateUser(usern, usere, res) {
 
 // Create new user
 async function insertUser(user) {
-    const response = await user.save()
+    await user.save()
 }
 
 
@@ -127,18 +127,18 @@ router.post('/api/verifyuser', async (req, res) => {
 
 router.post('/api/getuser',authenticateToken, async(req, res) => {
 
-    
     User.findOne({ username: req.body.username }).then((user) => {
+        console.log(user)
         res.json(user)
     })
 
 })
 
 
-// Get all users names and id
+// Get all users details and id
 
-router.get('/api/getallusers', async (req, res) => {
-    User.find({}, {"username" : 1, "_id": 1}).then((users) => {
+router.post('/api/getallusers', async (req, res) => {
+    User.find({},).then((users) => {
         res.json(users)
     })
 })
