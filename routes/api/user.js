@@ -1,5 +1,4 @@
 const express = require('express')
-const app = express()
 const router = express.Router()
 const bcrypt = require('bcryptjs')
 require('dotenv').config()
@@ -7,6 +6,10 @@ require('dotenv').config()
 
 // JWT for Authentication
 const jwt = require('jsonwebtoken')
+
+
+
+const app = express()
 app.use(express.json())
 
 
@@ -52,6 +55,7 @@ router.post('/api/createuser', async (req, res) => {
 
 
 
+// Check if username / emailid already in use
 
 async function checkDuplicateUser(usern, usere, res) {
 
@@ -59,11 +63,11 @@ async function checkDuplicateUser(usern, usere, res) {
 
     User.find({}, {'emailid' : 1, 'username' : 1, '_id': 0}).then(data => {
 
-        console.log(data)
+        // console.log(data)
         for (dt of data) {
 
             // console.log('walking')
-            console.log(dt)
+            // console.log(dt)
             if (usern === dt.username) {
                 res.end('This username is already in use')
                 return false
@@ -82,11 +86,14 @@ async function checkDuplicateUser(usern, usere, res) {
     
 }
 
+
+// Create new user
 async function insertUser(user) {
     const response = await user.save()
-    // console.log(response)
 }
 
+
+// Verify User Login
 
 router.post('/api/verifyuser', async (req, res) => {
 
@@ -101,7 +108,7 @@ router.post('/api/verifyuser', async (req, res) => {
           if (rs) {
                 // Generate auth token and send as repsonse
                 const accessToken = jwt.sign(req.body.username, process.env.JWT_ACCESS_TOKEN)
-                res.json({ accessToken : accessToken, loginStatus : 'Login Successfull'})
+                res.json({ accessToken : accessToken, loginStatus : 'Login Successfull', username: req.body.username})
             //   res.end('Login Successfull')
               return true
           } else {
@@ -116,16 +123,31 @@ router.post('/api/verifyuser', async (req, res) => {
 
 
 
+// Get user details 
 
-router.get('/api/random', authenticateToken, (req, res) => {
-    console.log(req.user)
-    res.send('helloo')
+router.post('/api/getuser',authenticateToken, async(req, res) => {
+
+    
+    User.findOne({ username: req.body.username }).then((user) => {
+        res.json(user)
+    })
 
 })
 
+
+// Get all users names and id
+
+router.get('/api/getallusers', async (req, res) => {
+    User.find({}, {"username" : 1, "_id": 1}).then((users) => {
+        res.json(users)
+    })
+})
+
+// Authentication Service Middleware
+
 function authenticateToken(req, res, next) {
     const authHeader = req.headers['authorization']
-    console.log(authHeader)
+    // console.log(authHeader)
     const token = authHeader && authHeader.split(' ')[1]
     if (token == null) return res.sendStatus(401)
 
@@ -137,4 +159,6 @@ function authenticateToken(req, res, next) {
     
 }
 
-module.exports = router
+
+
+module.exports = {router, authenticateToken, insertUser}

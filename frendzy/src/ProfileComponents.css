@@ -1,0 +1,28 @@
+.profilecard, .friendrequests {
+    padding: 2rem;
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: black;
+}
+
+.profile-image {
+    border-radius: 50%;
+    background: #000;
+    margin: 5px;
+}
+
+.profilecard > p {
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.profilecard > h3 {
+    font-weight: 500;
+}
+.profilecard > h4 {
+    font-size: .7rem;
+    font-weight: 500;
+}

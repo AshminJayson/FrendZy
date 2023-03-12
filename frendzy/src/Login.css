@@ -112,7 +112,7 @@ form > button {
     border-radius: 1rem;
     width: 50%;
     height: 40%;
-    animation: left-right 1.5s ease-in infinite alternate;
+    animation: left-right 2s infinite alternate;
     margin-top: -4rem;
     margin-left: 12rem;
     /* background: black; */
@@ -140,20 +140,20 @@ form > button {
 
 @-webkit-keyframes up-down {
     0% { transform: translateY(0); }
-    100% { transform: translateY(-8px); }
+    100% { transform: translate(-5px, 10px); }
 }
 @keyframes up-down {
     0% { transform: translateY(0); }
-    100% { transform: translateY(-8px); }
+    100% { transform: translate(-5px, 10px); }
 }
 
 @-webkit-keyframes left-right {
     0% { transform: translateX(0); }
-    100% { transform: translateX(12px); }
+    100% { transform: translate(10px, 10px);}
 }
 @keyframes left-right {
     0% { transform: translateX(0); }
-    100% { transform: translateX(12px); }
+    100% { transform: translate(10px, 10px); }
 }
 
 

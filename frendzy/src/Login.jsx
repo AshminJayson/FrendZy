@@ -30,9 +30,10 @@ export function Login() {
         axios.post('http://localhost:8082/api/verifyuser', user).then((res) => {
             // alert(res.data.loginStatus)
             if(res.data.loginStatus == "Login Successfull") {
+                sessionStorage.setItem('username', res.data.username)
                 sessionStorage.setItem('access_token', res.data.accessToken)
                 // console.log(sessionStorage.getItem("access_token"))
-                // axios.get('http://localhost:8082/api/random', {headers: {"Authorization": `Bearer ${sessionStorage.getItem("access_token")}`}}).then((res) => {
+                // axios.get('http://localhost:8082/api/random', ).then((res) => {
                 //     console.log(res)
 
                 // })

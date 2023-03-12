@@ -1,1 +1,39 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.profile-section {
+    display: flex;
+    gap: 1rem;
+    width: 85vw;
+    height: 85vh;
+    /* background: #000; */
+    gap: 1rem;
+}
+
+.profile-section > div {
+    border-radius: 2rem;
+}
+
+.current-user-details {
+    height: 40%;
+    background: white;
+    width: 25%;
+}
+
+.requested-user-details {
+    height: 100%;
+    width: 50%;
+    background: white;
+
+}
+
+.notificationandfriendlist {
+    height: 50%;
+    background: white;
+    width: 25%;
+}
+
 

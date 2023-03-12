@@ -15,8 +15,10 @@ app.use(cors({ origin: true, credentials: true }));
 app.use(express.json({ extended: false }));
 // app.use(bodyParser.json())
 const users = require('./routes/api/user')
+const friends = require('./routes/api/friends')
 
-app.use('/', users)
+app.use('/', users.router)
+app.use('/', friends)
 
 app.get('/', (req, res) => res.send('Hello world!'));
 

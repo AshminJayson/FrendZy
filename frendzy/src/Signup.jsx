@@ -150,7 +150,7 @@ export function Signup() {
                     <label htmlFor="email">Email<sup>*</sup></label>
                     <input type="text" placeholder='user@provider.com' name="emailid" onChange={onChange} required/>
                     <label htmlFor="password">Password<sup>*</sup></label>
-                    <input type="password" placeholder="Min 8 Characters : Preferably your crush's name" name="password" onChange={onChange} required/>
+                    <input type="password" placeholder="Min.8 Characters : Preferably your crush's name" name="password" onChange={onChange} required/>
                     <label htmlFor="confirm password">Confirm Password<sup>*</sup></label>
                     <input type="password" placeholder="What was that again?" name="cpassword" onChange={onChange} required/>
                     <p>Existing User ? <a href="/">Login</a></p>
