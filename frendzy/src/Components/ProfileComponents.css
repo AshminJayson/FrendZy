@@ -1,0 +1,176 @@
+.profilecard, .friendrequests {
+    padding: 1.5rem;
+    gap: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    /* background-color: black; */
+}
+
+.friendrequests > hr {
+    height: 2px;
+    width: 100%;
+    background: rgb(91, 85, 85);
+    border-radius: 100rem;
+    margin: 1rem 0;
+}
+
+.friendrequest > h3 {
+    color: white;
+}
+
+
+.friendrequest {
+    padding: 1rem;
+    border-radius: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: #000000;
+}
+
+.friendrequest > .button {
+    border-radius: 50%;
+    height: 3rem;
+    width: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+
+.friendrequest:hover {
+    box-shadow: -3px 3px grey;
+    transform: translateY(-2px);
+}
+
+
+.friendrequest > .button.accept {
+    background: #5138ee;
+}
+
+
+.friendrequest > .button.reject {
+    background: red;
+}
+
+
+.profile-image {
+    border-radius: 50%;
+    background: #000;
+    margin: 5px;
+}
+
+.profilecard > p {
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.profilecard > h3 {
+    font-weight: 500;
+}
+.profilecard > h4 {
+    font-size: .7rem;
+    font-weight: 500;
+}
+
+button {
+    margin-top: 1rem;
+    background-color: #5138ee;
+    border-radius: 2rem;
+    height: 2.5rem;
+    width: auto;
+    text-align: center;
+    line-height: 2px;
+}
+
+.search {
+    color: black;
+    margin: 1rem auto;
+    text-align: center;
+    /* height: 2rem; */
+    outline: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.searchInput {
+    border-radius: 1rem;
+    width: 20rem;
+    text-align: center;
+    background-color: white;
+    border: 2px solid lightgray;
+}
+
+.searchInput > input {
+    all:unset
+}
+
+
+button.Request.Pending {
+    background: black;
+    cursor: crosshair;
+}
+
+.availdata {
+    display: flex;
+    gap: 10px;
+    padding-top: 10rem;
+    padding: 1rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 10rem;
+    overflow-y: scroll;
+}
+
+.availdata {
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+}
+.availdata::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
+}
+
+.availdata > div {
+    border-radius: 1rem;
+    height: 5rem;
+    border: 1px solid grey;
+    padding: 20px;
+    background: rgba(212, 234, 253, 0.966);
+    width: 100%;
+}
+
+.searchcard {
+    display: flex;
+    flex-direction: column;
+}
+
+.availdata > div > p {
+    margin: 0;
+    padding: 0;
+    font-weight: 600;
+}
+
+
+.friends {
+    padding: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+
+}
+
+
+.friendcard {
+    color: white;
+    background: blue;
+    padding: 1rem;
+    min-width: 10rem;
+    border-radius: 1rem;
+}

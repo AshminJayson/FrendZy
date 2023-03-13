@@ -14,14 +14,21 @@ export function Profile() {
         username: '',
         emailid: ''
     })
+    let navigate = useNavigate()
 
     const [friends, setFriends] = useState([])
     const [allUsers, setAllUsers] = useState([])
 
     useEffect(() => {
+
+
         let username = sessionStorage.getItem('username')
         let authtoken = sessionStorage.getItem('access_token')
 
+        if (!authtoken) {
+            alert('Invalid Login')
+            navigate('/')
+        }
         
         axios.post('http://localhost:8082/api/getuser',{
             username : username
@@ -38,13 +45,22 @@ export function Profile() {
         axios.post('http://localhost:8082/api/getfriendrequests',{
             username : username
         },{headers: {"Authorization": `Bearer ${authtoken}`}}).then((res) => res).then(
-            (({data: username}) => {
-                setFriends(username)
+            (({data: user}) => {
+                setFriends(user)
             })
         )
         
         axios.post('http://localhost:8082/api/getallusers').then((res) => {
             // console.log(res)
+            let x = res.data
+            // console.log(x)
+            for (let user of x) {
+                if (user.username == sessionStorage.getItem('username')) {
+                    // console.log(x.indexOf(user))
+                    x.splice(x.indexOf(user), 1)
+                }
+            }
+            // console.log(x)
             setAllUsers(res.data)
             // console.log('allusers', allUsers)
         }

@@ -128,7 +128,7 @@ router.post('/api/verifyuser', async (req, res) => {
 router.post('/api/getuser',authenticateToken, async(req, res) => {
 
     User.findOne({ username: req.body.username }).then((user) => {
-        console.log(user)
+        // console.log(user)
         res.json(user)
     })
 

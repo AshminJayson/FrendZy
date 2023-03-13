@@ -2,17 +2,67 @@ import './ProfileComponents.css'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import { FaGreaterThan } from 'react-icons/fa'
+import { FaUserPlus, FaUserSlash } from 'react-icons/fa'
+
+
+
+
+export function FriendCard(user) {
+
+    const [fuser, setUser] = useState({})
+
+    useEffect(() => {
+
+        let requesteduser = user.user.username
+        let authtoken = sessionStorage.getItem('access_token')
+
+        axios.post('http://localhost:8082/api/getuser',{
+            username : requesteduser
+        },{headers: {"Authorization": `Bearer ${authtoken}`}}).then((res) => {
+            setUser(res.data)
+        }
+        )
+        
+        // console.log('fuser', fuser)
+    },[])
+
+    return (
+        <>
+        {Object.keys(fuser).length !== 0 && (
+            <>
+            <div className="friendcard">
+                <div>{fuser.username}</div>
+                <div>{fuser.emailid}</div>
+            </div>
+            </>
+        )}
+        </>
+
+    )
+    
+}
+
 
 
 export function Profilecard({username, emailid}) {
+
+
+    let navigate = useNavigate()
+
+    function logOut() {
+
+        sessionStorage.clear()
+        navigate('/')    
+        
+    }
     return (
         <>
         <div className="profilecard">
-            <img className="profile-image" src="" alt="" width={100} height={100}/>
+            <img className="profile-image" src="" alt="" width={120} height={120}/>
             {/* <p>It's time to connect !</p> */}
             <h2>{username}</h2>
             <h4>{emailid}</h4>
+            <button id='Logout' onClick={logOut}>Logout</button>
         </div>
         </>
     )
@@ -26,6 +76,8 @@ export function SearchBar({data}) {
     const [filtered, setFilter] = useState([])
     const [requser, setProfile] = useState({})
 
+
+
     
     function filterupdate(e) {
         // let currentuser = sessionStorage.getItem('username')
@@ -36,14 +88,19 @@ export function SearchBar({data}) {
             return value.username.toLowerCase().includes(searchword.toLowerCase())
         })
 
+
         if (searchword === "") {
             setFilter([])
         }
         else {
             setFilter(newfilter)
         }        
+
     }
+
+
     const [connState, setConnState] = useState('')
+    const [mutualfriends, setMutualFriends] = useState([])
     
     function showuserdetails(e) {
 
@@ -55,8 +112,20 @@ export function SearchBar({data}) {
         },{headers: {"Authorization": `Bearer ${authtoken}`}}).then((res) => {
             setProfile(res.data)
             setFilter([])
+            setMutualFriends([])
         }
         )
+
+
+        axios.post('http://localhost:8082/api/getmutualfriends',{
+            currentuser: sessionStorage.getItem('username'),
+            requesteduser: requesteduser
+        },{headers: {"Authorization": `Bearer ${authtoken}`}}).then((res) => {
+            setMutualFriends(res.data)
+        }
+        )
+
+
 
         axios.post('http://localhost:8082/api/getrelation',{
             currentuser : sessionStorage.getItem('username'),
@@ -76,6 +145,7 @@ export function SearchBar({data}) {
             else if (res.data == 'friends') {
                 temp = 'Unfriend'
             }
+            
             setConnState(temp)
         }
         )
@@ -83,12 +153,13 @@ export function SearchBar({data}) {
         
         
     }
+
+
     
     
     function useraction(e) {
         const requesteduser = e.target.id
         let authtoken = sessionStorage.getItem('access_token')
-
 
         if (connState == 'Connect') {
 
@@ -103,9 +174,25 @@ export function SearchBar({data}) {
         }
         else if (connState == 'Cancel Request') {
 
+            axios.post('http://localhost:8082/api/cancelfriendrequest',{
+                currentuser: sessionStorage.getItem('username'),
+                requesteduser: requesteduser
+            },{headers: {"Authorization": `Bearer ${authtoken}`}}).then((res) => {
+                console.log(res)
+            }
+            )
+
         }
 
         else if (connState == 'Unfriend') {
+
+            axios.post('http://localhost:8082/api/unfrienduser',{
+                currentuser: sessionStorage.getItem('username'),
+                requesteduser: requesteduser
+            },{headers: {"Authorization": `Bearer ${authtoken}`}}).then((res) => {
+                console.log(res)
+            }
+            )
 
         }
 
@@ -121,15 +208,30 @@ export function SearchBar({data}) {
             </div>    
             {filtered.length != 0 && (
                 <div className="availdata">
-                {filtered.map((value,key) => {
+                {filtered.map((value) => {
                     return <div className="searchcard" onClick={showuserdetails} id={value.username}>{value.username} </div>
                 })}
-            </div>
+                </div>
             )}
             {Object.keys(requser).length !== 0 && (
                 <>
+                <h4>Username</h4>
                 <div className='profileview'>{requser.username}</div>
+                <h4>Email ID</h4>
+                <div>{requser.emailid}</div>
                 <button id={requser.username} className={connState} onClick={useraction}>{connState}</button>
+
+                <h3>Mutual Friends</h3>
+                <div className="mutualfriends"></div>
+                {mutualfriends.map((friend) => {
+                    return <FriendCard user={friend}/>
+                })}
+                <h3>Friends</h3>
+                <div className="friends">
+                {requser.friends.map((friend) => {
+                    return <FriendCard user={friend}/>
+                })}
+                </div>
                 </>
             )}
         </div>
@@ -143,9 +245,10 @@ export function SearchBar({data}) {
 
 export function Friendrequests({friends}) {
 
-    const navigate = useNavigate()
+    
     function connectClick(e) {
-        let requesteduser = e.target.id
+
+        let requesteduser = e.currentTarget.id
         let currentuser = sessionStorage.getItem('username')
         let authtoken = sessionStorage.getItem('access_token')
         // console.log(currentuser, requesteduser)
@@ -163,7 +266,7 @@ export function Friendrequests({friends}) {
 
 
     function declineClick(e) {
-        let requesteduser = e.target.id
+        let requesteduser = e.currentTarget.id
         let currentuser = sessionStorage.getItem('username')
         let authtoken = sessionStorage.getItem('access_token')
         // console.log(currentuser, requesteduser)
@@ -179,24 +282,21 @@ export function Friendrequests({friends}) {
     
     } 
 
-
-    // useEffect(() => {
-    //     friends.map((item, index) => {
-    //         console.log(item)
-    //     })
-    // })
-
     return (
         <>
 
             <div className="friendrequests">
             <h3>They wanna connect with ya!</h3>
-                {friends.map((item, index) => {
+            <hr />
+                {friends.map((item) => {
                     return(
                     <>
-                    <div>{item.username}</div>
-                    <button id={item.username} onClick={connectClick}>Connect</button>
-                    <button id={item.username} onClick={declineClick}>Decline</button>
+                    <div className="friendrequest">
+                        <h3>{item.username}</h3>
+                        <h3>{item.emailid}</h3>
+                        <div  className='button accept' id={item.username} onClick={connectClick}><FaUserPlus id={item.username} size={30} color='white'/></div>
+                        <div  className='button reject' id={item.username} onClick={declineClick}><FaUserSlash size={30}/></div>
+                    </div>
                     </> 
                     )
                 })}

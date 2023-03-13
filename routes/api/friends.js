@@ -162,6 +162,33 @@ router.post('/api/declinefriendrequest', async (req, res) => {
 
 // Remove user as friend
 
+router.post('/api/unfrienduser', async (req, res) => {
+    User.findOne({username: req.body.currentuser}).then((currentuser) => {
+        User.findOne({username: req.body.requesteduser}).then((requesteduser) => {
+                
+        // console.log(currentuser, requesteduser)
+        currentuser.friends.pull({
+            userid: requesteduser._id,
+            username: requesteduser.username
+        })
+        
+        requesteduser.friends.pull({
+            userid: currentuser._id,
+            username: currentuser.username
+        })
+
+
+        try {
+            insertUser(currentuser)
+            insertUser(requesteduser)
+                res.send('Unfriended')
+            }
+            catch {
+                res.send('Error')
+            }
+        })
+    })
+})
 
 
 // Cancel friend request
@@ -233,7 +260,7 @@ async function addfriend(req, res) {
 
 
 // Get mutual friends
-router.get('/api/getmutualfriends', async (req, res) => {
+router.post('/api/getmutualfriends', async (req, res) => {
     User.findOne({username : req.body.currentuser}, {"friends" : 1, "_id" : 0}).then((user) => {
         let currentuserfriends = user.friends
 

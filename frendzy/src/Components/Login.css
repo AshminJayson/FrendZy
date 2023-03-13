@@ -89,7 +89,7 @@ form > button {
 
 
 .image-section {
-    background: url('./assets/5559852.jpg');
+    background: url('../assets/5559852.jpg');
     background-size: cover;
     position: relative;
     display: flex;
@@ -97,22 +97,22 @@ form > button {
 }
 
 .image-up {
-    background: url('./assets/representation-user-experience-interface-design-smartphone.jpg');
+    background: url('../assets/representation-user-experience-interface-design-smartphone.jpg');
     background-size: cover;
     border-radius: 1rem;
     width: 60%;
     height: 30%;
-    animation: up-down 1.5s infinite alternate;
+    animation: up-down 2.5s infinite alternate;
     margin-top: 5rem;
     margin-left: 10%;
 }
 .image-down {
-    background: url('./assets/representation-user-experience-interface-design-smartphone1.jpg');
+    background: url('../assets/representation-user-experience-interface-design-smartphone1.jpg');
     background-size: cover;
     border-radius: 1rem;
     width: 50%;
     height: 40%;
-    animation: left-right 2s infinite alternate;
+    animation: left-right 2.5s infinite alternate;
     margin-top: -4rem;
     margin-left: 12rem;
     /* background: black; */

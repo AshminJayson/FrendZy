@@ -18,7 +18,11 @@
 }
 
 .current-user-details {
-    height: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50%;
     background: white;
     width: 25%;
 }
