@@ -46,11 +46,13 @@ The user had the ability to search up a particular user using the search bar and
 	  `JWT_ACCESS_TOKEN='4df6db4894515389961367f37e7e8d0e76c90c398b085f8748202b2bc7cc13fa7229f6755846fea1869e5077996f65ba2bfadfeb35c53dddfafd8f7f9f43ec32'`
 	  `MONGO_USERNAME='frendzyadmin'`
 	  `MONGO_PASSWORD='frendzyadmin'`
-   5. Run the backend server via the command `npm run start` 
+   5. Run the backend server via  `npm run start` 
  
  **Ensure that the server is running on port 8082 else the API end points will need to be modified**
   
 **Running the Frontend Application**
- 1. Switch to the front end directory from FrendZy `cd frenzy`
- 2. Install required npm packages for react `npm install`
+ 1. Switch to the front end directory from FrendZy  `cd frenzy`
+ 2. Install required npm packages via  `npm install`
  3. Run the front end application via `npm run dev`  ( or  `npm run build` followed by `npm run preview`)
+
+## Video link of Application Demonstration
