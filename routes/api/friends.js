@@ -14,7 +14,7 @@ app.use(express.json())
 
 // Get user friends 
 
-router.get('/api/getfriends', async (req, res) => {
+router.post('/api/getfriends', async (req, res) => {
     User.findOne({username : req.body.username}, {"friends" : 1, "_id" : 0}).then((user) => {
         if(user) {
             res.json(user.friends)

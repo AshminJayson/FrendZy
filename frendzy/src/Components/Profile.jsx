@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Profilecard, Friendrequests, SearchBar } from './ProfileComponents';
+import { Profilecard, Friendrequests, SearchBar, Friendslist } from './ProfileComponents';
 
 
 
@@ -16,6 +16,7 @@ export function Profile() {
     })
     let navigate = useNavigate()
 
+    const [friendrequests, setFriendsRequests] = useState([])
     const [friends, setFriends] = useState([])
     const [allUsers, setAllUsers] = useState([])
 
@@ -46,9 +47,20 @@ export function Profile() {
             username : username
         },{headers: {"Authorization": `Bearer ${authtoken}`}}).then((res) => res).then(
             (({data: user}) => {
-                setFriends(user)
+                setFriendsRequests(user)
             })
         )
+
+
+        axios.post('http://localhost:8082/api/getfriends',{
+            username : username
+        },{headers: {"Authorization": `Bearer ${authtoken}`}}).then((res) => {
+                setFriends(res.data)
+            })
+                
+
+
+
         
         axios.post('http://localhost:8082/api/getallusers').then((res) => {
             // console.log(res)
@@ -82,7 +94,8 @@ export function Profile() {
                     <SearchBar data={allUsers}/>
                 </div>
                 <div className='notificationandfriendlist'>
-                    <Friendrequests friends={friends}/>
+                    <Friendrequests friends={friendrequests}/>
+                    <Friendslist friends={friends}/>
                 </div>
             </div>
         </>

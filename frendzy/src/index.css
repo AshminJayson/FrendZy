@@ -12,7 +12,10 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  --grad: linear-gradient(to right bottom, #5138ee, #0084ff, #00acf6, #00c9c4, #85dfa8);
 }
+
+
 
 a {
   font-weight: 500;
@@ -30,6 +33,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-image: var(--grad);
 }
 
 h1 {

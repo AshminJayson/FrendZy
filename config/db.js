@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const config = require('config');
 require('dotenv').config()
 
-const db = "mongodb+srv://Ashmin:" + process.env.MONGO_PASSWORD +"@cluster0.acoof0c.mongodb.net/?retryWrites=true&w=majority"
+const db = "mongodb+srv://" + process.env.MONGO_USERNAME +  ":" + process.env.MONGO_PASSWORD +"@cluster0.acoof0c.mongodb.net/?retryWrites=true&w=majority"
 
 
 const connectDB = async () => {

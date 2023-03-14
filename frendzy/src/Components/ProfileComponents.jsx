@@ -31,7 +31,9 @@ export function FriendCard(user) {
         {Object.keys(fuser).length !== 0 && (
             <>
             <div className="friendcard">
+                <p>Username</p>
                 <div>{fuser.username}</div>
+                <p>Email ID</p>
                 <div>{fuser.emailid}</div>
             </div>
             </>
@@ -74,31 +76,31 @@ export function Profilecard({username, emailid}) {
 export function SearchBar({data}) {
 
     const [filtered, setFilter] = useState([])
-    const [requser, setProfile] = useState({})
-
-
-
+    
+    
+    
     
     function filterupdate(e) {
         // let currentuser = sessionStorage.getItem('username')
         const searchword = e.target.value
         // console.log(searchword)
-
+        
         const newfilter = data.filter((value) => {
             return value.username.toLowerCase().includes(searchword.toLowerCase())
         })
-
-
+        
+        
         if (searchword === "") {
             setFilter([])
         }
         else {
             setFilter(newfilter)
         }        
-
+        
     }
-
-
+    
+    
+    const [requser, setProfile] = useState({})
     const [connState, setConnState] = useState('')
     const [mutualfriends, setMutualFriends] = useState([])
     
@@ -214,25 +216,26 @@ export function SearchBar({data}) {
                 </div>
             )}
             {Object.keys(requser).length !== 0 && (
-                <>
-                <h4>Username</h4>
-                <div className='profileview'>{requser.username}</div>
-                <h4>Email ID</h4>
-                <div>{requser.emailid}</div>
-                <button id={requser.username} className={connState} onClick={useraction}>{connState}</button>
-
-                <h3>Mutual Friends</h3>
-                <div className="mutualfriends"></div>
-                {mutualfriends.map((friend) => {
-                    return <FriendCard user={friend}/>
-                })}
-                <h3>Friends</h3>
-                <div className="friends">
-                {requser.friends.map((friend) => {
-                    return <FriendCard user={friend}/>
-                })}
+                
+                <div className="profileview">
+                    <h4>Username</h4>
+                    <div>{requser.username}</div>
+                    <h4>Email ID</h4>
+                    <div>{requser.emailid}</div>
+                    <button id={requser.username} className={connState} onClick={useraction}>{connState}</button>
+                    <h3>Mutual Friends</h3>
+                    <div className="mutualfriends"></div>
+                    {mutualfriends.map((friend) => {
+                        return <FriendCard user={friend}/>
+                    })}
+                    <h3>Friends</h3>
+                    <div className="friends">
+                    {requser.friends.map((friend) => {
+                        return <FriendCard user={friend}/>
+                    })}
+                    </div>
                 </div>
-                </>
+
             )}
         </div>
     )
@@ -301,6 +304,24 @@ export function Friendrequests({friends}) {
                     )
                 })}
             </div>
+        </>
+    )
+}
+
+
+
+
+export function Friendslist(friends) {
+    return (
+        <>
+        <div className="friendslist">
+        <h3>Your Friends</h3>
+        <hr />
+            {friends.friends.map((user) => {
+                {/* console.log(user) */}
+                return <FriendCard user={user} />
+            })}
+        </div>
         </>
     )
 }
