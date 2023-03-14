@@ -1,6 +1,6 @@
 ## FrendZy Mini Social Network
 
-FrendZy is a web based mini social networking app that encompasses the basic social network functionalities such as user login and creation, alongside profile creation as well as the capability to connect with other users on the website based on the friend request and acceptance model.
+FrendZy is a web based mini social networking app that encompasses the basic social network functionalities such as user login and creation as well as the capability to connect with other users on the website based on the friend request and acceptance model.
 
 ## Technological Stack [MERN]
 
