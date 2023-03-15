@@ -10,10 +10,7 @@ import { Profilecard, Friendrequests, SearchBar, Friendslist } from './ProfileCo
 
 export function Profile() {
     
-    const [user, setUser] = useState({
-        username: '',
-        emailid: ''
-    })
+    const [user, setUser] = useState({})
     let navigate = useNavigate()
 
     const [friendrequests, setFriendsRequests] = useState([])
@@ -35,10 +32,7 @@ export function Profile() {
             username : username
         },{headers: {"Authorization": `Bearer ${authtoken}`}}).then((res) => {
             // console.log('whyyy')
-            setUser({
-                username: res.data.username,
-                emailid: res.data.emailid
-            })
+            setUser(res.data)
             
         })
         
@@ -88,7 +82,7 @@ export function Profile() {
         <>
             <div className="profile-section">
                 <div className='current-user-details'>
-                    <Profilecard emailid={user.emailid} username={user.username}/>
+                    <Profilecard emailid={user.emailid} username={user.username} description={user.description} dateofbirth = {user.dateofbirth} profileurl = {user.profileurl}/>
                 </div>
                 <div className='requested-user-details'>
                     <SearchBar data={allUsers}/>

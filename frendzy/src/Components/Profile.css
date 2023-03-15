@@ -7,12 +7,16 @@
 }
 
 .profile-section {
+    margin-top: 2rem;
     display: flex;
     gap: 1rem;
     width: 85vw;
-    height: 85vh;
     /* background: #000; */
     gap: 1rem;
+}
+
+.profileview > h3 {
+    margin-top: 1rem;
 }
 
 .profile-section > div {
@@ -24,13 +28,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 50%;
+    height: 80%;
     background: white;
     width: 25%;
 }
 
 .requested-user-details {
-    height: 100%;
     width: 50%;
     background: white;
 

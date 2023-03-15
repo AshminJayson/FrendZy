@@ -17,7 +17,21 @@ const UserSchema = new mongoose.Schema({
     description: {
         type: String,
     },
+
+    dateofbirth : {
+        // Date stored as string instead of date since there isn't a need for timezone
+        type: String,
+    },
     
+    gender : {
+        type: String
+    },
+
+    profileurl : {
+        type: String
+    },
+
+
     friends: [
         {
             userid: mongoose.Types.ObjectId,

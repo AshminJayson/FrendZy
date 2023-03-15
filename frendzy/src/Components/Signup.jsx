@@ -58,7 +58,7 @@ export function Signup() {
     }
 
     const onChange = (e) => {
-        console.log(user)
+        // console.log(user)
         createUser({ ...user, [e.target.name] : e.target.value})
     }
 
@@ -71,7 +71,7 @@ export function Signup() {
 
         e.preventDefault()
 
-        console.log(user)
+        // console.log(user)
 
         let flag = false
 
@@ -119,8 +119,16 @@ export function Signup() {
                 em.placeholder = 'This Email ID is already in use'
             }
             if (res.data == 'User Created') {
-                alert('Hop On')
-                navigate('/')
+
+                axios.post('http://localhost:8082/api/verifyuser', user).then((res) => {
+                    console.log('')
+
+                    if(res.data.loginStatus == "Login Successfull") {
+                        sessionStorage.setItem('username', res.data.username)
+                        sessionStorage.setItem('access_token', res.data.accessToken)
+                        alert('Hop on')
+                        navigate('/createprofile')
+                    }})
             }
         })
         .catch((err) => {

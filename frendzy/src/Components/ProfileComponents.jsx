@@ -46,7 +46,7 @@ export function FriendCard(user) {
 
 
 
-export function Profilecard({username, emailid}) {
+export function Profilecard({username, emailid, description, profileurl, dateofbirth}) {
 
 
     let navigate = useNavigate()
@@ -60,11 +60,15 @@ export function Profilecard({username, emailid}) {
     return (
         <>
         <div className="profilecard">
-            <img className="profile-image" src="" alt="" width={120} height={120}/>
+            <img className="profile-image" src={profileurl} alt="" width={120} height={120}/>
             {/* <p>It's time to connect !</p> */}
             <h2>{username}</h2>
             <h4>{emailid}</h4>
-            <button id='Logout' onClick={logOut}>Logout</button>
+            <h4>{description}</h4>
+            <h4>Date of Birth : {dateofbirth}</h4>
+            { sessionStorage.getItem('username') == username && 
+                <button id='Logout' onClick={logOut}>Logout</button>
+            }
         </div>
         </>
     )
@@ -218,17 +222,22 @@ export function SearchBar({data}) {
             {Object.keys(requser).length !== 0 && (
                 
                 <div className="profileview">
-                    <h4>Username</h4>
+                    {/* <h4>Username</h4>
                     <div>{requser.username}</div>
                     <h4>Email ID</h4>
-                    <div>{requser.emailid}</div>
+                    <div>{requser.emailid}</div> */}
+                    <Profilecard username={requser.username} profileurl = {requser.profileurl} emailid={requser.emailid} description={requser.description} dateofbirth={requser.dateofbirth} />
                     <button id={requser.username} className={connState} onClick={useraction}>{connState}</button>
+                    {mutualfriends.length > 0 &&
                     <h3>Mutual Friends</h3>
+                    }
                     <div className="mutualfriends"></div>
                     {mutualfriends.map((friend) => {
                         return <FriendCard user={friend}/>
                     })}
+                    {requser.friends.length > 0 &&
                     <h3>Friends</h3>
+                    }
                     <div className="friends">
                     {requser.friends.map((friend) => {
                         return <FriendCard user={friend}/>

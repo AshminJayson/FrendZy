@@ -206,7 +206,7 @@ button.Request.Pending {
     color: white;
     background-image: var(--grad);
     padding: 1rem;
-    min-width: 10rem;
+    width: 15rem;
     border-radius: 1rem;
 }
 
@@ -219,6 +219,7 @@ button.Request.Pending {
     display: flex;
     flex-direction: column;
     gap: .5rem;
+    align-items: center;
 }
 
 .friendslist > h3 {
