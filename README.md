@@ -66,8 +66,7 @@ The list of friends of one particular user and the mutual friends between two us
 |Connected?|Unfriend User|
 
 
- - **Friends and Mutual Friends View** : Upon searching for a particular user, the current user could see the list of friends that the requested user has as well as their mutual friends.
-
+ - **Friends and Mutual Friends View** : Upon searching for a particular user, the current user can see the list of friends that the requested user has as well as their mutual friends.
 
 
 ## Running the application
