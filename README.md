@@ -54,7 +54,7 @@ The list of friends of one particular user and the mutual friends between two us
  - **User Login** : The user login mechanism makes use of a backend authorization API which checks for both the validity of a username and a valid password check prompting the user about the error. The login API also returns a JWT authorization token which is used in conjucntion with the username for the subsequent API calls made to the backend.
  - *Logging out of a particular user is accomplished through removal of the JWT token from the session store which prohibits all further API calls and prevent the user from performing any potential actions on the platform*
  
- - **User Searches** : The application also features a search bar that allows the authenticated user to search for any user on the platform and at the same time initiate a friend request or perform a action depending on their current connection state.
+ - **User Searches** : The application also features a search bar that allows the authenticated user to search for any other user and initiate a friend request or perform a action depending on their current connection state.
  
  - **Connection Model**: The connection between users were handled using the following model.
 		 
