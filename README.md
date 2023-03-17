@@ -65,7 +65,6 @@ The list of friends of one particular user and the mutual friends between two us
 |Connection Request Recieved?|Accept/Decline Connection Request|
 |Connected?|Unfriend User|
 
-The user had the ability to search up a particular user using the search bar and perform the required action depending upon their connection status at the moment.
 
  - **Friends and Mutual Friends View** : Upon searching for a particular user, the current user could see the list of friends that the requested user has as well as their mutual friends.
 
