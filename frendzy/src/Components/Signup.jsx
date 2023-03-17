@@ -154,13 +154,13 @@ export function Signup() {
                 <p>One click for you, One giant hug from your friends</p>
                 <form id="signup-form" onSubmit={onSubmit}>
                     <label htmlFor="username">Username<sup>*</sup></label>
-                    <input type="text" placeholder='Log pyaar se mujhse Rahul Kehte Hei' name="username" onChange={onChange} required/>
+                    <input type="text" placeholder='Enter an unique username' name="username" onChange={onChange} required/>
                     <label htmlFor="email">Email<sup>*</sup></label>
                     <input type="text" placeholder='user@provider.com' name="emailid" onChange={onChange} required/>
                     <label htmlFor="password">Password<sup>*</sup></label>
-                    <input type="password" placeholder="Min.8 Characters : Preferably your crush's name" name="password" onChange={onChange} required/>
+                    <input type="password" placeholder="Min.8 Characters " name="password" onChange={onChange} required/>
                     <label htmlFor="confirm password">Confirm Password<sup>*</sup></label>
-                    <input type="password" placeholder="What was that again?" name="cpassword" onChange={onChange} required/>
+                    <input type="password" placeholder="Re-enter Password" name="cpassword" onChange={onChange} required/>
                     <p>Existing User ? <a href="/">Login</a></p>
                     <button>Sign Up</button>
                 </form>

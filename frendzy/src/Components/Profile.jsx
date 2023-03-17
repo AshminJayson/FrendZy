@@ -56,7 +56,7 @@ export function Profile() {
 
 
         
-        axios.post('http://localhost:8082/api/getallusers').then((res) => {
+        axios.post('http://localhost:8082/api/getallusers','',{headers: {"Authorization": `Bearer ${authtoken}`}}).then((res) => {
             // console.log(res)
             let x = res.data
             // console.log(x)

@@ -64,9 +64,9 @@ export function Login() {
                 <p>You back already?</p>
                 <form id="login-form" onSubmit={onSubmit}>
                     <label htmlFor="username">Username<sup>*</sup></label>
-                    <input type="text" name="username" placeholder='Think Harder!' onChange={onChange} required/>
+                    <input type="text" name="username" placeholder='Enter the unique username!' onChange={onChange} required/>
                     <label htmlFor="password">Password<sup>*</sup></label>
-                    <input type="password" name="password" placeholder="Don't tell me you forgot that!" onChange={onChange} required/>
+                    <input type="password" name="password" placeholder="Enter the password" onChange={onChange} required/>
                     <p>Still stuck alone ? <a href="/signup">Create an Account</a></p>
                     <button>Login</button>
                 </form>

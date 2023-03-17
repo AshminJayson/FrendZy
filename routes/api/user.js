@@ -20,7 +20,7 @@ const saltrounds = parseInt(process.env.SALT_ROUNDS)
 const User = require('../../models/usermodel')
 
 
-router.post('/api/updateprofile', async(req, res) => {
+router.post('/api/updateprofile', authenticateToken, async(req, res) => {
     User.findOne({ username: req.body.username }).then((user) => {
         // user.update(req.body)
         user.$set(
@@ -31,7 +31,7 @@ router.post('/api/updateprofile', async(req, res) => {
                 gender: req.body.gender
             }
             )
-        console.log(user)
+        // console.log(user)
         insertUser(user)
         res.send('Profile Updated')
     })
@@ -154,7 +154,7 @@ router.post('/api/getuser',authenticateToken, async(req, res) => {
 
 // Get all users details and id
 
-router.post('/api/getallusers', async (req, res) => {
+router.post('/api/getallusers', authenticateToken, async (req, res) => {
     User.find({},).then((users) => {
         res.json(users)
     })

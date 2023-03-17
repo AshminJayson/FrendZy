@@ -30,7 +30,7 @@ export function FriendCard(user) {
         <>
         {Object.keys(fuser).length !== 0 && (
             <>
-            <div className="friendcard">
+            <div key={fuser.username} className="friendcard">
                 <p>Username</p>
                 <div>{fuser.username}</div>
                 <p>Email ID</p>
@@ -86,6 +86,7 @@ export function SearchBar({data}) {
     
     function filterupdate(e) {
         // let currentuser = sessionStorage.getItem('username')
+        setFilter([])
         const searchword = e.target.value
         // console.log(searchword)
         
@@ -214,8 +215,8 @@ export function SearchBar({data}) {
             </div>    
             {filtered.length != 0 && (
                 <div className="availdata">
-                {filtered.map((value) => {
-                    return <div className="searchcard" onClick={showuserdetails} id={value.username}>{value.username} </div>
+                {filtered.map((value, index) => {
+                    return <div key={index} className="searchcard" onClick={showuserdetails} id={value.username}>{value.username} </div>
                 })}
                 </div>
             )}
@@ -240,7 +241,7 @@ export function SearchBar({data}) {
                     }
                     <div className="friends">
                     {requser.friends.map((friend) => {
-                        return <FriendCard user={friend}/>
+                        return <FriendCard key={requser.username} user={friend}/>
                     })}
                     </div>
                 </div>
@@ -296,23 +297,23 @@ export function Friendrequests({friends}) {
 
     return (
         <>
-
+        {friends.length > 0 &&
             <div className="friendrequests">
             <h3>They wanna connect with ya!</h3>
             <hr />
-                {friends.map((item) => {
+                {friends.map((item, index) => {
                     return(
-                    <>
-                    <div className="friendrequest">
+                    
+                    <div key={index} className="friendrequest">
                         <h3>{item.username}</h3>
                         <h3>{item.emailid}</h3>
                         <div  className='button accept' id={item.username} onClick={connectClick}><FaUserPlus id={item.username} size={30} color='white'/></div>
                         <div  className='button reject' id={item.username} onClick={declineClick}><FaUserSlash size={30}/></div>
                     </div>
-                    </> 
                     )
                 })}
             </div>
+        }
         </>
     )
 }
@@ -325,10 +326,16 @@ export function Friendslist(friends) {
         <>
         <div className="friendslist">
         <h3>Your Friends</h3>
+        {friends.friends == 0 && 
+            <h5 style={{
+                fontWeight: 400,
+                fontStyle: 'italic'
+            }}>You have No Friends</h5>
+        }
         <hr />
-            {friends.friends.map((user) => {
+            {friends.friends.map((user, index) => {
                 {/* console.log(user) */}
-                return <FriendCard user={user} />
+                return <FriendCard key={index} user={user} />
             })}
         </div>
         </>

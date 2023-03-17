@@ -14,7 +14,7 @@ app.use(express.json())
 
 // Get user friends 
 
-router.post('/api/getfriends', async (req, res) => {
+router.post('/api/getfriends', auth,  async (req, res) => {
     User.findOne({username : req.body.username}, {"friends" : 1, "_id" : 0}).then((user) => {
         if(user) {
             res.json(user.friends)
@@ -27,7 +27,7 @@ router.post('/api/getfriends', async (req, res) => {
 })
 
 
-router.post('/api/getfriendrequests', async (req, res) => {
+router.post('/api/getfriendrequests',auth,  async (req, res) => {
     User.findOne({username: req.body.username}, {"friendrequestsrecieved" : 1}).then((users) => {
         if(users) {
             res.json(users.friendrequestsrecieved)
@@ -41,7 +41,7 @@ router.post('/api/getfriendrequests', async (req, res) => {
 // Send friend request
 
 
-router.post('/api/sendfriendrequest', async (req, res) => {
+router.post('/api/sendfriendrequest',auth, async (req, res) => {
 
 
     User.findOne({username: req.body.currentuser}).then((currentuser) => {
@@ -98,7 +98,7 @@ router.post('/api/getrelation',auth, async (req, res) => {
 
 // Accept friend request
 
-router.post('/api/acceptfriendrequest', async (req, res) => {
+router.post('/api/acceptfriendrequest', auth,  async (req, res) => {
 
     // console.log(req.body.currentuser, req.body.requesteduser)
     User.findOne({username: req.body.currentuser}).then((currentuser) => {
@@ -131,7 +131,7 @@ router.post('/api/acceptfriendrequest', async (req, res) => {
 
 // Decline friend request
 
-router.post('/api/declinefriendrequest', async (req, res) => {
+router.post('/api/declinefriendrequest', auth, async (req, res) => {
     User.findOne({username: req.body.currentuser}).then((currentuser) => {
         User.findOne({username: req.body.requesteduser}).then((requesteduser) => {
                 
@@ -162,7 +162,7 @@ router.post('/api/declinefriendrequest', async (req, res) => {
 
 // Remove user as friend
 
-router.post('/api/unfrienduser', async (req, res) => {
+router.post('/api/unfrienduser', auth, async (req, res) => {
     User.findOne({username: req.body.currentuser}).then((currentuser) => {
         User.findOne({username: req.body.requesteduser}).then((requesteduser) => {
                 
@@ -193,7 +193,7 @@ router.post('/api/unfrienduser', async (req, res) => {
 
 // Cancel friend request
 
-router.post('/api/cancelfriendrequest', async (req, res) => {
+router.post('/api/cancelfriendrequest', auth, async (req, res) => {
     User.findOne({username: req.body.currentuser}).then((currentuser) => {
         User.findOne({username: req.body.requesteduser}).then((requesteduser) => {
                 
@@ -225,7 +225,7 @@ router.post('/api/cancelfriendrequest', async (req, res) => {
 
 // Add user as friend 
 
-router.post('/api/addfriend', async (req, res) =>  {
+router.post('/api/addfriend', auth, async (req, res) =>  {
 
     await addfriend(req, res)
 
@@ -260,7 +260,7 @@ async function addfriend(req, res) {
 
 
 // Get mutual friends
-router.post('/api/getmutualfriends', async (req, res) => {
+router.post('/api/getmutualfriends', auth, async (req, res) => {
     User.findOne({username : req.body.currentuser}, {"friends" : 1, "_id" : 0}).then((user) => {
         let currentuserfriends = user.friends
 
