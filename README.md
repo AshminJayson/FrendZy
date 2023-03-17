@@ -5,6 +5,7 @@ FrendZy is a web based mini social networking app that encompasses the basic soc
 ## Task and Solution
 
 **Task**
+
 Create a mini social network. The application should have features like:-
 
 · Users should be able to sign up/sign in, and create a profile for themselves.
