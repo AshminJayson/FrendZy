@@ -76,6 +76,7 @@ The list of friends of one particular user and the mutual friends between two us
  2. Change directory `cd FrendZy`
  3. Install required npm packages at server side by running `npm install`
  4. Create a .env file with the following lines containing the bcrypt hash, JWT token and Mongo Credentials
+ 
 	  `SALT_ROUNDS=10`
 	  
 	  `JWT_ACCESS_TOKEN='4df6db4894515389961367f37e7e8d0e76c90c398b085f8748202b2bc7cc13fa7229f6755846fea1869e5077996f65ba2bfadfeb35c53dddfafd8f7f9f43ec32'`
